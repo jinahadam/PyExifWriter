@@ -4,6 +4,7 @@ from PIL import Image
 import piexif
 import csv
 
+
 def to_deg(value, loc):
         if value < 0:
             loc_value = loc[0]
@@ -34,11 +35,11 @@ def set_gps_location(file_name, lat, lng):
     exif_dict["GPS"][piexif.GPSIFD.GPSLongitudeRef] = lng_deg[3]
     exif_dict["GPS"][piexif.GPSIFD.GPSLongitude] =  (int(lng*1000000), 1000000)
 
-    print(exif_dict)
+    #print(exif_dict)
     exif_bytes = piexif.dump(exif_dict)
-    im.save("results/"+file_name, "jpeg", exif=exif_bytes)
+    im.save("results/"+file_name, "jpeg", exif=exif_bytes, quality=100)
 
-
+#filename
 with open('exifgps.txt', 'rb') as csvfile:
    data = csv.reader(csvfile, delimiter=',', quotechar='|')
    for row in data:
